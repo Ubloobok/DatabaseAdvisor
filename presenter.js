@@ -1,7 +1,7 @@
 ﻿function databaseAdvisor() {
     const instance = {
         model: {
-            attributes: fetchAttributes(),
+            //attributes: fetchAttributes(),
             databases: fetchDatabases()
         },
         filters: {
@@ -39,12 +39,10 @@
             const availableAttributes = this.collectAttributeValues(this.model.databases);
             const filterAttributes = this.filters.attributes;
             const selectedAttributes = this.selected.attributes;
-            const modelAttributes = this.model.attributes;
 
             Object.entries(availableAttributes).forEach(([key, attr]) => {
                 if (!filterAttributes[key]) {
                     filterAttributes[key] = {
-                        name: modelAttributes[key].name,
                         values: {}
                     };
                 }
@@ -55,11 +53,14 @@
                     };
                 }
             });
+
+            this.selectedChanged(this.selected);
         },
         selectedChanged(value) {
             console.log("Selected has been changed:");
             console.log(value);
 
+            // Filter suggested based on selected selected:
             const selectedAttributes = this.selected.attributes;
             const suggestedDatabases = this.model.databases.filter(function (database) {
                 return Object.keys(selectedAttributes).every(function (attr) {
@@ -79,23 +80,23 @@
             this.suggested.databases = suggestedDatabases;
 
             const filterAttributes = this.filters.attributes;
-            const availableAttributes = this.collectAttributeValues(suggestedDatabases);
-            const modelAttributes = this.model.attributes;
-            Object.entries(availableAttributes).forEach(([key, attr]) => {
-                if (!attr.name) {
-                    attr.name = modelAttributes[key].name;
-                }
-            });
-            //this.filters.attributes = availableAttributes;
+            //const availableAttributes = this.collectAttributeValues(suggestedDatabases);
+            //const modelAttributes = this.model.attributes;
 
-            // Update disabled state of filter attributes
+            // Update filter based on suggested (available) databases:
             Object.keys(filterAttributes).forEach(key => {
-                Object.keys(filterAttributes[key].values).forEach(value => {
-                    filterAttributes[key].values[value].disabled = !this.suggested.databases.some(db => db.attributes[key]?.values.includes(value));
+                const filterAttribute = filterAttributes[key];
+                Object.keys(filterAttribute.values).forEach(value => {
+                    const attrValue = filterAttributes[key].values[value];
+                    const count = suggestedDatabases.filter(db => db.attributes[key]?.values.includes(value)).length;
+                    attrValue.count = count;
+                    attrValue.disabled = count === 0;
                 });
             });
         }
     };
+
     instance.init();
+
     return instance;
 }

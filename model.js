@@ -16,11 +16,11 @@ function fetchDatabases() {
         costPricingModel: "",
         lockingIndexes: "",
         attributes: {
-            license: { values: ["Open Source"] },
-            cap: { values: ["cp"] },
-            hosting: { values: ["onPrem", "aws", "azure", "gcp"] },
-            type: { values: ["rdbms", "keyValue-", "document", "columnar-", "fullText-"] },
-            schema: { values: ["onWrite", "onRead"] }
+            "License": { values: ["Open Source"] },
+            "CAP": { values: ["cp"] },
+            "Hosting": { values: ["onPrem", "aws", "azure", "gcp"] },
+            "Type": { values: ["rdbms", "keyValue-", "document", "columnar-", "fullText-"] },
+            "Schema": { values: ["onWrite", "onRead"] }
         }
     },
     {
@@ -40,11 +40,11 @@ function fetchDatabases() {
         "costPricingModel": "",
         "lockingIndexes": "",
         attributes: {
-            license: { values: ["Open Source"] },
-            cap: { values: ["cp"] },
-            hosting: { values: ["azure", "aws", "onPrem", "gcp"] },
-            type: { values: ["keyValue-", "document"] },
-            schema: { values: ["onRead"] }
+            "License": { values: ["Open Source"] },
+            "CAP": { values: ["cp"] },
+            "Hosting": { values: ["azure", "aws", "onPrem", "gcp"] },
+            "Type": { values: ["keyValue-", "document"] },
+            "Schema": { values: ["onRead"] }
         }
     }, {
         "name": "CosmosDB",
@@ -63,11 +63,11 @@ function fetchDatabases() {
         "costPricingModel": "",
         "lockingIndexes": "",
         attributes: {
-            license: { values: ["Proprietary"] },
-            cap: { values: ["cp", "cap-", "ap"] },
-            hosting: { values: ["azure"] },
-            type: { values: ["document"] },
-            schema: { values: [] }
+            "License": { values: ["Proprietary"] },
+            "CAP": { values: ["cp", "cap-", "ap"] },
+            "Hosting": { values: ["azure"] },
+            "Type": { values: ["document"] },
+            "Schema": { values: [] }
         }
     }]
 }
