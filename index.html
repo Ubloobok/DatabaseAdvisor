@@ -6,7 +6,8 @@
     <title>Database Advisor</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.3/dist/cdn.min.js" defer></script>
-    <script src="data.js"></script>
+    <script src="model.js"></script>
+    <script src="presenter.js"></script>
     <style>
         .form-group {
             margin-bottom: 1rem;
@@ -22,72 +23,32 @@
         <h2>Database Advisor</h2>
         <form>
             <div class="form-group row">
-                <label for="cap" class="col-sm-2 col-form-label">CAP</label>
-                <div class="col-sm-10">
-                    <select id="cap" class="form-control" x-model="cap">
-                        <template x-for="option in options.cap" :key="option">
-                            <option x-text="option" :value="option"></option>
-                        </template>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="dataProcessing" class="col-sm-2 col-form-label">Data Processing</label>
-                <div class="col-sm-10">
-                    <select id="dataProcessing" class="form-control" x-model="dataProcessing">
-                        <template x-for="option in options.dataProcessing" :key="option">
-                            <option x-text="option" :value="option"></option>
-                        </template>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="license" class="col-sm-2 col-form-label">License</label>
-                <div class="col-sm-10">
-                    <select id="license" class="form-control" x-model="selected.license">
-                        <template x-for="option in options.license" :key="option">
-                            <option x-text="option" :value="option"></option>
-                        </template>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
                 <div class="form-group col-lg-3">
-                    <label>Heavy Usage Scenario</label>
-                    <template x-for="scenario in options.heavyUsageScenario" :key="scenario">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" :id="scenario" :value="scenario" x-model="selected.heavyUsageScenarios">
-                            <label class="form-check-label" :for="scenario" x-text="scenario"></label>
+                    <label>Filters for Attributes</label>
+                    <template x-for="(attr, key) in filters.attributes" :key="key">
+                        <div class="form-group">
+                            <label x-text="attr.name"></label>
+                            <template x-for="value in attr.values" :key="value">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" :id="key + '-' + value" :value="value" x-model="selected.attributes[key].values">
+                                    <label class="form-check-label" :for="key + '-' + value" x-text="value"></label>
+                                </div>
+                            </template>
                         </div>
                     </template>
                 </div>
-                <div class="form-group col-lg-3">
-                    <label>Type</label>
-                    <template x-for="type in options.type" :key="type">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" :id="type" :value="type" x-model="selected.types">
-                            <label class="form-check-label" :for="type" x-text="type"></label>
+                <div class="form-group col-lg-9">
+                    <label>Suggested Databases</label>
+                    <template x-for="database in suggested.databases" :key="database.name">
+                        <div class="form-group">
+                            <p><b>Database: <span x-text="database.name"></span></b></p>
+                            <p>its attributes: <span x-text="JSON.stringify(database.attributes)"></span></p>
+                            <p>its features: <span x-text="JSON.stringify(database.features)"></span></p>
+                            <p>its utilities: <span x-text="JSON.stringify(database.utilities)"></span></p>
+                            <p>its pricing model: <span x-text="JSON.stringify(database.costPricingModel)"></span></p>
                         </div>
                     </template>
                 </div>
-                <div class="form-group col-lg-3">
-                    <label>Hosting Constraints</label>
-                    <template x-for="constraint in options.hostingConstraints" :key="constraint">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" :id="constraint" :value="constraint" x-model="selected.hostingConstraints">
-                            <label class="form-check-label" :for="constraint" x-text="constraint"></label>
-                        </div>
-                    </template>
-                </div>
-            </div>
-            <div>
-                <p><b>Suggested:</b></p>
-                <p>Database: <span x-text="suggested.database.name"></span></p>
-                <p>its features: <span x-text="JSON.stringify(suggested.database.features)"></span></p>
-                <p>its utilities: <span x-text="JSON.stringify(suggested.database.utilities)"></span></p>
-                <p>its pricing model: <span x-text="JSON.stringify(suggested.database.costPricingModel)"></span></p>
-                <!--<p>its features: <span x-text="suggested.features.join(', ')"></span></p>-->
-                <!--<p>its utilities: <span x-text="suggested.utilities.join(', ')"></span></p>-->
             </div>
         </form>
     </div>
