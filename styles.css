@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.filters {
+    background: #f1f1f1;
+    padding: 1rem;
+    border-radius: 2px;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+    .filter-group h6 {
+        margin-bottom: 0.5rem;
+    }
+
+.form-check-label.disabled {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.suggested {
+    padding: 1rem;
+    border-radius: 2px;
+}
+
+.database-box {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+    .database-box h6 {
+        margin-bottom: 1rem;
+    }
+
+    .database-box p {
+        margin-bottom: 0.5rem;
+    }
