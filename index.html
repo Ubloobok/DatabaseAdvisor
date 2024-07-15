@@ -18,7 +18,7 @@
                     <h5>Filters for Attributes</h5>
                     <template x-for="(attr, attrKey) in filters.attributes" :key="attrKey">
                         <div class="filter-group">
-                            <h6 x-text="attrKey"></h6>
+                            <h6 x-text="attr.name"></h6>
                             <template x-for="(valueData, valueKey) in attr.values" :key="valueKey">
                                 <div class="form-check">
                                     <input type="checkbox"
