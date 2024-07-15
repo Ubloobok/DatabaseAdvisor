@@ -16,6 +16,10 @@
         .form-check-inline {
             margin-right: 1rem;
         }
+
+        .form-check-label.disabled {
+            text-decoration: line-through;
+        }
     </style>
 </head>
 <body>
@@ -25,13 +29,22 @@
             <div class="form-group row">
                 <div class="form-group col-lg-3">
                     <label>Filters for Attributes</label>
-                    <template x-for="(attr, key) in filters.attributes" :key="key">
+                    <template x-for="(attr, attrKey) in filters.attributes" :key="attrKey">
                         <div class="form-group">
-                            <label x-text="attr.name"></label>
-                            <template x-for="value in attr.values" :key="value">
+                            <label x-text="attrKey"></label>
+                            <template x-for="(valueData, valueKey) in attr.values" :key="valueKey">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" :id="key + '-' + value" :value="value" x-model="selected.attributes[key].values">
-                                    <label class="form-check-label" :for="key + '-' + value" x-text="value"></label>
+                                    <input type="checkbox"
+                                           class="form-check-input" 
+                                           x-model="selected.attributes[attrKey].values" 
+                                           :class="{'disabled': valueData.disabled}" 
+                                           :id="attrKey + '-' + valueKey" 
+                                           :value="valueKey" 
+                                           :disabled="valueData.disabled" />
+                                    <label class="form-check-label" 
+                                           x-text="valueKey"
+                                           :class="{'disabled': valueData.disabled}" 
+                                           :for="attrKey + '-' + valueKey" />
                                 </div>
                             </template>
                         </div>
@@ -58,5 +71,15 @@
             return databaseAdvisor();
         }
     </script>
+</body>
+</html>
+
+    </div>
+
+<script>
+    function init() {
+        return databaseAdvisor();
+    }
+</script>
 </body>
 </html>

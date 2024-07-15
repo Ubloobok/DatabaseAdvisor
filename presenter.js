@@ -7,13 +7,13 @@
         filters: {
             attributes: {
                 // Automatically populated.
-                //license: { values: ["Open Source"] }
+                // license: { values: { 'Open Source': { disabled: false } } }
             }
         },
         selected: {
             attributes: {
                 // Automatically populated.
-                //license: { values: ["Open Source"] }
+                // license: { values: [] }
             }
         },
         suggested: {
@@ -24,11 +24,11 @@
             databases.forEach(database => {
                 Object.entries(database.attributes).forEach(([key, attrData]) => {
                     if (!result[key]) {
-                        result[key] = { values: [] };
+                        result[key] = { values: {} };
                     }
                     attrData.values.forEach(function (value) {
-                        if (!result[key].values.includes(value)) {
-                            result[key].values.push(value);
+                        if (!result[key].values[value]) {
+                            result[key].values[value] = { disabled: false };
                         }
                     });
                 });
@@ -44,16 +44,19 @@
             Object.entries(availableAttributes).forEach(([key, attr]) => {
                 if (!filterAttributes[key]) {
                     filterAttributes[key] = {
-                        name: modelAttributes[key].name, values: []
+                        name: modelAttributes[key].name,
+                        values: {}
                     };
                 }
-                filterAttributes[key].values = Array.from(attr.values);
+                filterAttributes[key].values = { ...attr.values };
                 if (!selectedAttributes[key]) {
-                    selectedAttributes[key] = { values: [] };
+                    selectedAttributes[key] = {
+                        values: []
+                    };
                 }
             });
         },
-        selectedChanged: function (value) {
+        selectedChanged(value) {
             console.log("Selected has been changed:");
             console.log(value);
 
@@ -83,7 +86,14 @@
                     attr.name = modelAttributes[key].name;
                 }
             });
-            this.filters.attributes = availableAttributes;
+            //this.filters.attributes = availableAttributes;
+
+            // Update disabled state of filter attributes
+            Object.keys(filterAttributes).forEach(key => {
+                Object.keys(filterAttributes[key].values).forEach(value => {
+                    filterAttributes[key].values[value].disabled = !this.suggested.databases.some(db => db.attributes[key]?.values.includes(value));
+                });
+            });
         }
     };
     instance.init();
