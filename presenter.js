@@ -1,7 +1,6 @@
 ﻿function databaseAdvisor() {
     const instance = {
         model: {
-            //attributes: fetchAttributes(),
             databases: fetchDatabases()
         },
         filters: {
@@ -21,18 +20,32 @@
         },
         collectAttributeValues(databases) {
             let result = {};
+
+            // Collect all available attributes values.
             databases.forEach(database => {
                 Object.entries(database.attributes).forEach(([key, attrData]) => {
                     if (!result[key]) {
                         result[key] = { values: {} };
                     }
                     attrData.values.forEach(function (value) {
+                        // Add attribute value if not exist, enabled by default (i.e. disabled=false).
                         if (!result[key].values[value]) {
                             result[key].values[value] = { disabled: false };
                         }
                     });
                 });
             });
+
+            // Sort the attributes values.
+            Object.keys(result).forEach(key => {
+                const sortedValues = Object.keys(result[key].values).sort((a, b) => a.localeCompare(b));
+                const sortedValuesObj = {};
+                sortedValues.forEach(value => {
+                    sortedValuesObj[value] = result[key].values[value];
+                });
+                result[key].values = sortedValuesObj;
+            });
+
             return result;
         },
         init() {
@@ -80,8 +93,6 @@
             this.suggested.databases = suggestedDatabases;
 
             const filterAttributes = this.filters.attributes;
-            //const availableAttributes = this.collectAttributeValues(suggestedDatabases);
-            //const modelAttributes = this.model.attributes;
 
             // Update filter based on suggested (available) databases:
             Object.keys(filterAttributes).forEach(key => {

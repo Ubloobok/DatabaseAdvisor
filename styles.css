@@ -35,6 +35,7 @@ h2 {
 
 .form-check-label.disabled {
     text-decoration: line-through;
+    text-decoration-color: red;
     color: gray;
 }
 
