@@ -13,29 +13,30 @@
 <body>
     <div class="container mt-5" x-data="init()" x-init="$watch('selected', value => selectedChanged(value))">
         <h2>Database Advisor</h2>
+        <p>Thanks to <a href="https://github.com/max-arshinov/masad" target="_blank">Max Arshinov</a> for this idea.</p>
         <div class="row">
             <div class="col-lg-3 filters">
-                    <h5>Filters for Attributes</h5>
-                    <template x-for="(attrData, attrKey) in filters.attributes" :key="attrKey">
-                        <div class="filter-group">
-                            <h6 x-text="attrKey"></h6>
-                            <template x-for="(valueData, valueKey) in attrData.values" :key="valueKey">
-                                <div class="form-check">
-                                    <input type="checkbox"
-                                           class="form-check-input"
-                                           x-model="selected.attributes[attrKey].values"
-                                           :class="{'disabled': valueData.disabled}"
-                                           :id="attrKey + '-' + valueKey"
-                                           :value="valueKey"
-                                           :disabled="valueData.disabled" />
-                                    <label class="form-check-label"
-                                           x-text="valueKey + ' (' + valueData.count + ')'"
-                                           :class="{'disabled': valueData.disabled}"
-                                           :for="attrKey + '-' + valueKey" />
-                                </div>
-                            </template>
-                        </div>
-                    </template>
+                <h5>Filters for Attributes</h5>
+                <template x-for="(attrData, attrKey) in filters.attributes" :key="attrKey">
+                    <div class="filter-group">
+                        <h6 x-text="attrKey"></h6>
+                        <template x-for="(valueData, valueKey) in attrData.values" :key="valueKey">
+                            <div class="form-check">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       x-model="selected.attributes[attrKey].values"
+                                       :class="{'disabled': valueData.disabled}"
+                                       :id="attrKey + '-' + valueKey"
+                                       :value="valueKey"
+                                       :disabled="valueData.disabled" />
+                                <label class="form-check-label"
+                                       x-text="valueKey + ' (' + valueData.count + ')'"
+                                       :class="{'disabled': valueData.disabled}"
+                                       :for="attrKey + '-' + valueKey" />
+                            </div>
+                        </template>
+                    </div>
+                </template>
             </div>
             <div class="col-lg-9 suggested">
                 <h5>Suggested Databases</h5>
@@ -54,7 +55,6 @@
             </div>
         </div>
     </div>
-
     <script>
         function init() {
             return databaseAdvisor();
