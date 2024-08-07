@@ -27,8 +27,8 @@
                                        x-model="selected.attributes[attrKey].values"
                                        :class="{'disabled': valueData.disabled}"
                                        :id="attrKey + '-' + valueKey"
-                                       :value="valueKey"
-                                       :disabled="valueData.disabled" />
+                                       :value="valueKey" />
+                                       <!--:disabled="valueData.disabled"-->
                                 <label class="form-check-label"
                                        x-text="valueKey + ' (' + valueData.count + ')'"
                                        :class="{'disabled': valueData.disabled}"

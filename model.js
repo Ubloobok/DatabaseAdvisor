@@ -11,8 +11,10 @@ function fetchDatabases() {
                 "Features": { values: ["SQL"] },
                 "OLTP/OLAP": { values: ["OLTP", "OLAP-"] },
                 "Replication": { values: ["Leader/Follower", "Multi-leader"] },
-                "Partitioning": { values: ["Supported"] },
-                "Utilities": { values: ["Availability-", "Maintainability-"] },
+                "Partitioning": { values: ["Good"] },
+                "Scalability": { values: ["No"] },
+                "Availability": { values: ["SoSo"] },
+                "Maintainability": { values: ["SoSo"] },
                 "Use-case": { values: ["ByKey-", "ByQuery", "Update-", "Delete-"] }
             }
         },
@@ -27,8 +29,10 @@ function fetchDatabases() {
                 "Features": { values: ["SQL"] },
                 "OLTP/OLAP": { values: [] },
                 "Replication": { values: ["Leader/Follower", "Multi-leader"] },
-                "Partitioning": { values: ["Supported"] },
-                "Utilities": { values: ["Availability-", "Maintainability-"] },
+                "Partitioning": { values: ["Good"] },
+                "Scalability": { values: ["No"] },
+                "Availability": { values: ["SoSo"] },
+                "Maintainability": { values: ["SoSo"] },
                 "Use-case": { values: ["ByKey-", "ByQuery", "Update-", "Delete-"] }
             }
         },
@@ -43,8 +47,10 @@ function fetchDatabases() {
                 "Features": { values: [] },
                 "OLTP/OLAP": { values: ["OLTP"] },
                 "Replication": { values: ["Leader/Follower", "Multi-leader"] },
-                "Partitioning": { values: ["Supported"] },
-                "Utilities": { values: ["Scalability-", "Availability-", "Maintainability"] },
+                "Partitioning": { values: ["Good"] },
+                "Scalability": { values: ["SoSo"] },
+                "Availability": { values: ["SoSo"] },
+                "Maintainability": { values: ["Good"] },
                 "Use-case": { values: ["ByKey", "ByQuery-", "Write-", "Update-"] }
             }
         },
@@ -59,8 +65,10 @@ function fetchDatabases() {
                 "Features": { values: [] },
                 "OLTP/OLAP": { values: ["OLTP"] },
                 "Replication": { values: ["Leader/Follower", "Multi-leader"] },
-                "Partitioning": { values: ["Supported"] },
-                "Utilities": { values: ["Scalability-", "Availability", "Maintainability", "Durability"] },
+                "Partitioning": { values: ["Good"] },
+                "Scalability": { values: ["SoSo"] },
+                "Availability": { values: ["Good"] },
+                "Maintainability": { values: ["Good"] },
                 "Use-case": { values: ["ByKey", "Write", "Update"] }
             }
         },
@@ -75,8 +83,10 @@ function fetchDatabases() {
                 "Features": { values: [] },
                 "OLTP/OLAP": { values: ["OLTP"] },
                 "Replication": { values: ["Leaderless"] },
-                "Partitioning": { values: [] },
-                "Utilities": { values: ["Scalability", "Availability", "Maintainability"] },
+                "Partitioning": { values: ["No"] },
+                "Scalability": { values: ["Good"] },
+                "Availability": { values: ["Good"] },
+                "Maintainability": { values: ["Good"] },
                 "Use-case": { values: ["ByKey", "Write", "Update", "Delete"] }
             }
         },
@@ -91,8 +101,10 @@ function fetchDatabases() {
                 "Features": { values: [] },
                 "OLTP/OLAP": { values: [] },
                 "Replication": { values: [] },
-                "Partitioning": { values: [] },
-                "Utilities": { values: ["Scalability", "Availability", "Maintainability"] },
+                "Partitioning": { values: ["No"] },
+                "Scalability": { values: ["Good"] },
+                "Availability": { values: ["Good"] },
+                "Maintainability": { values: ["Good"] },
                 "Use-case": { values: ["ByKey", "Write", "Update", "Delete"] }
             }
         }
